@@ -1,6 +1,6 @@
 import express from "express"
 import { EnvironmentAdapter } from "./config/EnvironmentAdapter.js";
-import type { Request, Response } from "express";
+import { ServerRouter } from "./presentation/routes.js";
 
 (() => {
   main();
@@ -9,9 +9,9 @@ import type { Request, Response } from "express";
 function main() {
   const app = express();
 
-  app.post("/api/github", (req: Request, res: Response) => {
-    res.json("Github endpoint");
-  })
+  app.use(express.json());
+
+  app.use(ServerRouter.routes)
 
   app.listen(EnvironmentAdapter.envs.PORT, () => {
     console.log(`App running on port ${EnvironmentAdapter.envs.PORT}`);
