@@ -10,7 +10,6 @@ export class GithubController {
 
   webhookHandler = async (req: Request, res: Response) => {
     const event = req.header("X-GitHub-Event") ?? "unknown";
-    const signature = req.header("X-Hub-Signature-256");
     const payload = req.body;
 
     try {
